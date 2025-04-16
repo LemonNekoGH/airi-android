@@ -1,6 +1,6 @@
 # アイリ Android
 
-A MCP server to allow ~~airi~~ LLM to use Android Device.
+A MCP server to allow ~~airi~~ LLM to use Android Device. This project is child project of [airi](https://github.com/moeru-ai/airi).
 
 ## Setup development environment
 
