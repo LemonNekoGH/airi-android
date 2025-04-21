@@ -1,3 +1,4 @@
+import os
 from ppadb.client import Client
 from ppadb.device import Device
 from typing import Optional
@@ -8,7 +9,10 @@ class DeviceManager:
     _device: Optional[Device]
 
     def __init__(self):
-        self._adb_client = Client()
+        host = os.getenv("ADB_HOST", "localhost")
+        port = os.getenv("ADB_PORT", 5037)
+
+        self._adb_client = Client(host, port)
         self._device = None
 
     def connect(self, host: str, port: int) -> None:
