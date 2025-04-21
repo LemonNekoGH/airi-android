@@ -2,6 +2,32 @@
 
 A MCP server to allow ~~airi~~ LLM to use Android Device. This project is child project of [airi](https://github.com/moeru-ai/airi).
 
+## Usage
+
+With Docker:
+
+```json5
+// mcp.json
+{
+  "mcpServers": {
+    "airi-android": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "-e",
+        "ADB_HOST",
+        "ghcr.io/lemonnekogh/airi-android:v0.1.0"
+      ],
+      "env": {
+        "ADB_HOST": "host.docker.internal"
+      }
+    }
+  }
+}
+```
+
 ## Setup development environment
 
 ### Package manager
