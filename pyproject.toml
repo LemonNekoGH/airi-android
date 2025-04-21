@@ -8,3 +8,8 @@ dependencies = [
     "mcp[cli]>=1.6.0",
     "pure-python-adb>=0.3.0.dev0",
 ]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.11.6",
+]
