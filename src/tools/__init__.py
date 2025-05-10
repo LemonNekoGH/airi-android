@@ -4,6 +4,7 @@ from .utils import register_utils_tools
 from .cpustat import register_cpustat_tools
 from .batterystats import register_batterystats_tools
 from .wm import register_wm_tools
+from .ui import register_ui_tools
 
 __all__ = [
     "register_device_tools",
@@ -12,4 +13,5 @@ __all__ = [
     "register_cpustat_tools",
     "register_batterystats_tools",
     "register_wm_tools",
+    "register_ui_tools",
 ]

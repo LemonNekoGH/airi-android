@@ -18,7 +18,7 @@ With Docker:
         "-i",
         "-e",
         "ADB_HOST",
-        "ghcr.io/lemonnekogh/airi-android:v0.1.0"
+        "ghcr.io/lemonnekogh/airi-android:v0.2.0"
       ],
       "env": {
         "ADB_HOST": "host.docker.internal"

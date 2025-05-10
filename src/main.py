@@ -7,6 +7,7 @@ from tools.utils import register_utils_tools
 from tools.cpustat import register_cpustat_tools
 from tools.batterystats import register_batterystats_tools
 from tools.wm import register_wm_tools
+from tools.ui import register_ui_tools
 
 # Create an MCP server
 mcp = FastMCP("airi-android")
@@ -21,3 +22,4 @@ register_utils_tools(mcp, device_manager)
 register_cpustat_tools(mcp, device_manager)
 register_batterystats_tools(mcp, device_manager)
 register_wm_tools(mcp, device_manager)
+register_ui_tools(mcp, device_manager)
