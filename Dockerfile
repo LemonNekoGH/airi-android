@@ -1,23 +1,31 @@
-FROM python:3.12-slim-bookworm
+FROM ghcr.io/astral-sh/uv:python3.12-bookworm
 
 LABEL org.opencontainers.image.source="https://github.com/LemonNekoGH/airi-android"
 
-# The installer requires curl (and certificates) to download the release archive
-RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates
+WORKDIR /app
 
-# Download the latest installer
-ADD https://astral.sh/uv/install.sh /uv-installer.sh
+# Enable bytecode compilation
+ENV UV_COMPILE_BYTECODE=1
 
-# Run the installer then remove it
-RUN sh /uv-installer.sh && rm /uv-installer.sh
+# Copy from the cache instead of linking since it's a mounted volume
+ENV UV_LINK_MODE=copy
 
-# Ensure the installed binary is on the `PATH`
-ENV PATH="/root/.local/bin/:$PATH"
+# Install the project's dependencies using the lockfile and settings
+RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=bind,source=uv.lock,target=uv.lock \
+    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+    uv sync --locked --no-install-project --no-dev
 
-COPY pyproject.toml uv.lock ./
+# Then, add the rest of the project source code and install it
+# Installing separately from its dependencies allows optimal layer caching
+COPY . /app
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --locked --no-dev
 
-RUN uv sync
+# Place executables in the environment at the front of the path
+ENV PATH="/app/.venv/bin:$PATH"
 
-COPY . .
+# Reset the entrypoint, don't invoke `uv`
+ENTRYPOINT []
 
-CMD ["uv", "run", "mcp", "run", "src/main.py"]
+CMD ["python", "src/main.py"]

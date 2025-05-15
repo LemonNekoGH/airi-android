@@ -1,3 +1,5 @@
+import signal
+import os
 from mcp.server.fastmcp import FastMCP
 
 from device import DeviceManager
@@ -23,3 +25,12 @@ register_cpustat_tools(mcp, device_manager)
 register_batterystats_tools(mcp, device_manager)
 register_wm_tools(mcp, device_manager)
 register_ui_tools(mcp, device_manager)
+
+if __name__ == "__main__":
+    def force_exit(*args):
+        print("Force exiting...", flush=True)
+        os.kill(os.getpid(), signal.SIGKILL)
+
+    signal.signal(signal.SIGINT, force_exit)
+
+    mcp.run()

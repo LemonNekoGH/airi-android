@@ -15,10 +15,11 @@ With Docker:
       "args": [
         "run",
         "--rm",
+        "--init",
         "-i",
         "-e",
         "ADB_HOST",
-        "ghcr.io/lemonnekogh/airi-android:v0.2.0"
+        "ghcr.io/lemonnekogh/airi-android:v0.2.1"
       ],
       "env": {
         "ADB_HOST": "host.docker.internal"
@@ -49,7 +50,7 @@ With Docker:
 Run the mcp inspector it will start the server.
 
 ```bash
-uv run mcp dev main.py
+uv run mcp dev src/main.py
 ```
 
 Open the inspector at `http://localhost:6274`.
