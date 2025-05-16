@@ -27,6 +27,7 @@ register_wm_tools(mcp, device_manager)
 register_ui_tools(mcp, device_manager)
 
 if __name__ == "__main__":
+
     def force_exit(*args):
         print("Force exiting...", flush=True)
         os.kill(os.getpid(), signal.SIGKILL)
